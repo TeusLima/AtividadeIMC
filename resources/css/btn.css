@@ -1,0 +1,29 @@
+.btn-confirmar {
+  /* Aparência inicial */
+  background-color: #10b981; /* Verde vibrante */
+  color: #ffffff;            /* Texto branco */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 12px 28px;
+  border: none;
+  border-radius: 8px;        /* Cantos arredondados */
+  cursor: pointer;
+  
+  /* Transição suave */
+  transition: all 0.25s ease-in-out; 
+  box-shadow: 0 4px 6px rgba(16, 185, 129, 0.2);
+}
+
+/* Efeito ao passar o mouse (Hover) */
+.btn-confirmar:hover {
+  background-color: #059669; /* Verde um pouco mais escuro */
+  box-shadow: 0 6px 12px rgba(16, 185, 129, 0.3); /* Sombra verde sutil */
+  transform: translateY(-2px); /* Efeito de elevação */
+}
+
+/* Efeito ao clicar (Active) */
+.btn-confirmar:active {
+  transform: translateY(0);    /* O botão "afunda" de volta */
+  box-shadow: 0 2px 4px rgba(16, 185, 129, 0.2);
+}
