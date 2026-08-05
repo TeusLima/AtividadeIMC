@@ -15,11 +15,16 @@
 
     <body>
         <header>
-            <nav class="">
-                <button type="submit" title="Let me go home...">Home</button>
-                <button>Experiencias</button>
-                <button>Formação</button>
-                <button>Especializações</button>
+            <nav class="nav">
+                <a href="/">
+                    <li type="submit" title="Let me go home...">Home</ul>
+                </a>
+                <a href="/">
+                    <li title="Let me go home...">IMC</li>
+                </a>
+                <a href="dashboard">
+                    <li title="Let me go home...">Dashboard</li>
+                </a>
             </nav>
         </header>
 
