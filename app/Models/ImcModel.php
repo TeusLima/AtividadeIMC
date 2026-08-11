@@ -1,52 +1,18 @@
 <?php
 
-    require "../database/migrations/2026_08_03_231439_i_m_c.php";
+namespace App\Models;
 
-    class ModelImc {
+use Illuminate\Database\Eloquent\Model;
 
-        public function processarDados($peso, $altura){
-            global $con;
+class ImcModel extends Model
+{
+    protected $table = "imc";
 
-            $sql = "INSERT INTO IMC (Peso, Altura) VALUES ($peso, $altura)";
-
-            if ($con->query($sql) === TRUE) {
-
-                $data = array('status' => 'Inserido com sucesso');
-
-            }else {
-
-                $data = array('status' => 'erro', 'mensagem' => $con->error);
-
-            }
-
-            return $data;
-        }
-        
-        public function selecionarDados(){
-
-            global $con;
-
-            $dados = [];
-
-            $query = "SELECT * FROM IMC";
-            $resultadoBanco = mysqli_query($con, $query);
-
-            if (mysqli_num_rows($resultadoBanco) > 0 ) {
-
-                while($row = mysqli_fetch_array($resultadoBanco)){
-
-                    $dados[] = array(
-                        'Id' => $row['Id'],
-                        'Peso' => $row['Peso'],
-                        'Altura' => $row['Altura']
-                    );
-                }
-            }
-
-            mysqli_close($con);
-
-            return $dados;
-        }
+    public function faixas(){
+        return $this->belongsTo(FaixaModel::class, 'idFaixa');
     }
 
-?>
+    public function users(){
+        return $this->belongsTo(User::class, 'id');
+    }
+}

@@ -13,10 +13,16 @@ return new class extends Migration
     {
         Schema::create('IMC', function (Blueprint $table){
             $table->id();
-            $table->string('nome');
             $table->double('peso');
             $table->double('altura');
             $table->timestamps();
+
+            $table->bigInteger('idFaixa')->unsigned();
+
+            $table->foreign('idFaixa')
+                  ->references('idFaixa')
+                  ->on('faixas')
+                  ->onDelete('cascade');
         });
     }
 
