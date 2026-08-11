@@ -22,10 +22,28 @@
         <label id="result">IMC: {{$resultado["imc"]}} </label><br>
         <label id="result">Faixa: {{$resultado["faixa"]}} </label><br>
 
-        <div class="col-12">
+        <!-- <div class="col-12">
                 <button type="submit" class="btn btn-primary">Salvar</button>
-        </div>
+        </div> -->
 
+        @if($resultado["imc"] != "Aguardando valores" && $resultado["faixa"] != "Aguardando valores")
+     
+
+        <form method="post" action="{{route('imc.salvar')}}">
+            @csrf
+            <input type="hiden" name="imc" value="{{$resultado['imc']}}">
+            <input type="hiden" name="faixa" value="{{$resultado['faixa']}}">
+            <input type="hiden" name="peso" value="{{$resultado['peso']}}">
+            <input type="hiden" name="altura" value="{{$resultado['altura']}}">
+
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary">Salvar</button>
+            </div>
+
+
+        </form>
+        
+        @endif
 
 
 

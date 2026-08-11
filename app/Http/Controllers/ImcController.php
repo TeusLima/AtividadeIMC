@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\FaixaModel;
+use App\Models\ImcModel;
 use Illuminate\Http\Request;
 
 class ImcController extends Controller
@@ -44,6 +46,27 @@ class ImcController extends Controller
         
 
         return view('imc.index')->with('resultado', $resultado);
+
+    }
+
+    public function store(Request $request){
+
+        $data = $request->all();
+        $peso = $data["peso"];
+        $altura = $data["altura"];
+        $faixa = $data["faixa"];
+
+        $idFaixa = FaixaModel::where('categoria', $faixa)->value('idFaixa');
+
+        $imcModel = new ImcModel();
+
+        $imcModel->peso = $peso;
+        $imcModel->altura = $altura;
+        $imcModel->idFaixa = $idFaixa;
+
+        $imcModel->save();
+
+        return to_route('imc.index');
 
     }
 
