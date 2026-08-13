@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\FaixaModel;
 use App\Models\ImcModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class ImcController extends Controller
 {
@@ -63,6 +64,34 @@ class ImcController extends Controller
         $imcModel->peso = $peso;
         $imcModel->altura = $altura;
         $imcModel->idFaixa = $idFaixa;
+
+        $validator = Validator::make($request->all(), ['image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',]);
+
+        if ($validator->fails()) {
+            return redirect()
+                ->route('imc.index')
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        if ($request->hasFile('image')) {
+
+            $image = $request->file('image');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+
+            $image->storeAs('images/user', $imageName, 'local');
+
+            //image->move(public_path('assets/images/'),$imageName);
+
+            $imcModel->url = 'storage/app/private/images/user/' . $imageName;
+
+
+        }else{
+
+            return redirect()
+                ->route('imc.index')
+                ->with('error', 'Falha ao carregar a imagem');
+        }
 
         $imcModel->save();
 

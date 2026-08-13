@@ -29,7 +29,7 @@
         @if($resultado["imc"] != "Aguardando valores" && $resultado["faixa"] != "Aguardando valores")
      
 
-        <form method="post" action="{{route('imc.salvar')}}">
+        <form method="post" action="{{route('imc.salvar')}}" enctype="multipart/form-data">
             @csrf
             <input type="hiden" name="imc" value="{{$resultado['imc']}}">
             <input type="hiden" name="faixa" value="{{$resultado['faixa']}}">
@@ -38,11 +38,28 @@
 
             <div class="col-12">
                 <button type="submit" class="btn btn-primary">Salvar</button>
+            </div><br><br>
+
+            <div>
+                <label for="formFile" class="form-label">Mande sua foto</label>
+                <input class="form-control" type="file" name="image" id="formFile">
             </div>
+
 
 
         </form>
         
+        @endif
+
+        @if($errors->any())
+        <div class="alert alert-danger">
+
+            <ul>
+                @foreach($error->all() as $error)
+                <li>{{$error}}</li>
+                @endforeach
+            </ul>
+        </div>
         @endif
 
 
